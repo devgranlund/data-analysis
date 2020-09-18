@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ..
+
+docker-compose up -d
+docker container exec -it data-analysis_analysis_1 /bin/bash

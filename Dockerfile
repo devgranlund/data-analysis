@@ -26,9 +26,19 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 
+RUN apt-get update && \
+apt-get install -y --no-install-recommends \
+        openjdk-11-jre
+
+
+
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 
 WORKDIR /usr/src/
+
+RUN curl -0 https://raw.githubusercontent.com/testmycode/tmc-cli/master/scripts/install.sh | bash
+
+RUN cd /usr/src/
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
